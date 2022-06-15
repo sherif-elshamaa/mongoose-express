@@ -19,21 +19,14 @@ mongoose.connect(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/createmany", createMany)
+app.post("/createmany", createMany)
 app.post('/remove', remove)
 
 app.get('/', (req, res) => {
     res.status(201).json({ message: "Welcome to MYAPI", status: 201 })
 });
 
-app.post('/', (req, res) => {
-    const { name, age, favArray } = req.body;
-    if (name && age && favArray) {
-        createPerson(name, age, favArray)
-    }
-    console.log({ name, age, favArray });
-    res.send({ name, age, favArray });
-})
+app.post('/create-person', createPerson)
 
 app.get('/find', findById)
 
